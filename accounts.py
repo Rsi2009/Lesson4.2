@@ -1,4 +1,4 @@
-class User():
+class User:
     def __init__(self, user_id, name):
         self._user_id = user_id
         self._name = name
@@ -36,10 +36,17 @@ class Admin(User):
         if user in self._users_list:
             self._users_list.remove(user)
             print(f"сотрудник {user.get_user_info_str()} удален из списка сотрудников")
-
+        else:
+            print(f"сотрудник {user} не найден в списке сотрудников")
     def get_users(self):
         return self._users_list[:]
 
+
+    def get_users_names(self):
+         a = []
+         for user in self._users_list:
+             a.append(user._name)
+         return a
 
 user1 = User(1, "Марина")
 user2 = User(2, "Олег")
@@ -50,8 +57,13 @@ print(user2.get_user_info_str())
 print(admin.get_user_info_str())
 
 user4 = User(4, "Виктор")
+admin.add_user(user1)
+admin.add_user(user2)
 admin.add_user(user4)
+admin.add_user(admin)
 print(admin.get_users())
+print(admin.get_users_names())
 
 admin.remove_user(user2)
 print(admin.get_users())
+print(admin.get_users_names())
